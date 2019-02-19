@@ -16,7 +16,7 @@ data(tips, package = "reshape2") # Loading the data set.
 ```{R}
 # How many parties did the waiter serve? Don't forget to store the number and print
 
-names(tips)
+#names(tips)
 
 numParty <- sum(table(tips$size))
 print(numParty)
@@ -46,7 +46,7 @@ summary(tips)
 tips$day <- levels(factor(tips$day, levels = c("Thur", "Fri", "Sat", "Sun"))) #Reordered the factor variable day
 day <- tips$day #Store the vector to the variable name day
 print(day) #Print the variable 
-head(tips, 20) #Checking to make sure the variabel is ordered correctly in the dataframe
+head(tips, 20) #Checking to make sure the variable is ordered correctly in the dataframe
 
 ```
 
@@ -75,7 +75,7 @@ ggplot(tips, aes(x = tip, y = total_bill, color = sex))+
 ```
 
 
-##### There seems to be a moderate, positive, linear asscoiation between tip and total_bill.  We can see from the ggplot that there are a couple outliers, which are around (10, 50), (6,8). An anomaly we can see from the ggplot is that there are many low tip amounts for high total bills. Some of which are (2.5, 44) and (<1, 33).  There also seems to be a lot more Male customers tipping then female customers.
+##### There seems to be a moderate, positive, linear asscoiation between tip and total_bill.  We can see from the ggplot that there are a couple outliers/anamolies. We can see some are around (10, 50), (6,8).  These are examples of an expensive bill with a large tip and a cheap bill with a high tip.  We can see from the ggplot that there are many low tip amounts for high total bills. Some of which are (2.5, 44) and (<1, 33).  There also seems to be a lot more Male customers tipping than female customers.
 
 
 
@@ -108,6 +108,14 @@ ggplot(tips, aes(x = time, y = tiprate))+
 
 ### Question 8 
 ```{R}
+femalesmokersTipper <- tips[tips$sex == "Female" & tips$smoker == 'Yes',]
+malesmokersTipper <- tips[tips$sex == "Male" & tips$smoker == 'Yes',]
+
+#summary(femalesmokersTipper)  
+#summary(malesmokersTipper) 
+#There are 33 Female Smokers
+#There are 60 Male Smokers
+
 ggplot(tips, aes(x = tip, total_bill, color = sex))+
   geom_point() + xlab("Tip Amount") + ylab("Total Bill Amount")+
   facet_wrap(~smoker)
@@ -116,7 +124,7 @@ ggplot(tips, aes(x = tip, total_bill, color = sex))+
 
 
 
-##### Looking at the scatter plot comparing smokers and non-smokers, there seems to be a stronger linear relationship between tip and total_bill when the person who is paying does not smoke.  There is a weak linear relationship between tip and total_bill when the customer that is paying also smokes. Both relationships are positive and have outliers. Looking at gender, males seem to be tipping more than females in general.  Looking at the smokers that tipped, females seem to be more spread out and are easier to see.  
+##### Looking at the scatter plot comparing smokers and non-smokers, there seems to be a stronger linear relationship between tip and total_bill when the person who is paying does not smoke.  There is a weak linear relationship between tip and total_bill when the customer that is paying also smokes. Both relationships are positive and have outliers. Looking at gender, males seem to be tipping more than females in general.  Looking at the smokers that tipped, females seem to be more spread out and are easier to see.  There are more nonsmokers that tip for both genders than smokers that tip.  
 
 
 

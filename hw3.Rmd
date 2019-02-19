@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Homework #3"
 output: html_document
 ---
 
@@ -23,7 +23,9 @@ print(numParty)
 
 
 ```
+
 ##### The waiter served 244 parties during the study. 
+
 
 ### Question 2 
 ```{R}
@@ -33,7 +35,10 @@ str(tips)
 summary(tips)
 
 ```
+
+
 ##### There are a total of 7 variables: total_bill(Numeric), tip(Numeric), sex(Factor), smoker(Factor), day(Factor), time(Factor), and Size(Integer).
+
 
 ### Question 3 
 ```{R}
@@ -68,7 +73,11 @@ ggplot(tips, aes(x = tip, y = total_bill, color = sex))+
   geom_point() + xlab("Tip Amount") + ylab("Total Bill Amount") + ggtitle("Tip vs. Total Bill Amount  by Party Size") +
   facet_wrap(~size, ncol = 3)
 ```
-##### There seems to be a moderate, positive, linear asscoiation between tip and total_bill.  We can see from the ggplot that there are a couple outliers, which are around (10, 50), (6,8). An anomaly we can see from the ggplot is that there are many low tip amounts for high total bills.  There also seems to be a lot more Male customers tipping then femal customers.
+
+
+##### There seems to be a moderate, positive, linear asscoiation between tip and total_bill.  We can see from the ggplot that there are a couple outliers, which are around (10, 50), (6,8). An anomaly we can see from the ggplot is that there are many low tip amounts for high total bills. Some of which are (2.5, 44) and (<1, 33).  There also seems to be a lot more Male customers tipping then female customers.
+
+
 
 ### Question 6
 ```{R}
@@ -81,15 +90,21 @@ tips$tiprate = tips$tip / tips$total_bill
 summary(tips$tiprate) 
 
 ```
+
+
 ##### The average rate for tips is a 16%
+
+
 
 ### Question 7
 ```{R}
 tips$time <- factor(tips$time, levels = c("Lunch", "Dinner"))
 
 ggplot(tips, aes(x = time, y = tiprate))+
-  geom_boxplot()
+  geom_boxplot(aes( fill = time)) + ggtitle("Tip Rate by Time")
 ```
+
+
 
 ### Question 8 
 ```{R}
@@ -98,14 +113,22 @@ ggplot(tips, aes(x = tip, total_bill, color = sex))+
   facet_wrap(~smoker)
 
 ```
-##### Looking at the scatter plot comparing smokers and non-smokers, there seems to be a stronger linear relationship between tip and total_bill when the person who is paying does not smoke.  There is a weak linear relationship between tip and total_bill when the customer that is paying also smokes.  Looking at gender, Males seem to be tipping more than females in general.  Looking at the smokers that tipped, Females seem to be more spread out and are easier to see.  
+
+
+
+##### Looking at the scatter plot comparing smokers and non-smokers, there seems to be a stronger linear relationship between tip and total_bill when the person who is paying does not smoke.  There is a weak linear relationship between tip and total_bill when the customer that is paying also smokes. Both relationships are positive and have outliers. Looking at gender, males seem to be tipping more than females in general.  Looking at the smokers that tipped, females seem to be more spread out and are easier to see.  
+
+
 
 ### Question 9 
 ```{R}
 tips$day <- factor(tips$day, levels = c("Thur", "Fri", "Sat", "Sun"))
 
 ggplot(tips, aes(x = day))+
-  geom_bar(aes(fill = sex)) 
+  geom_bar(aes(fill = sex), position = "dodge") + ggtitle("Relationship between day and gender") + ylab("Number of Males and Females Paying") + xlab("Day of the Week")
   
 ```
-##### Looking at the bar graph we can see an interesting relationships.  Overall Male customers are Tiping and Paying more than Females every Day of the week.  
+
+
+
+##### Looking at the bar graph we can see an interesting relationships.  Overall male customers are tiping and paying more often than females every day of the week.  Thursday seems to be the day where males pay the most amount of times, whle females pay the least amount of times.  Friday seems to be the day where Males and Females are paying a similar amount of times, males are still paying more times than females.  Saturday and Sunday seem to have the same distribution of amount of times male and female pay.  
